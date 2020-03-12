@@ -1,0 +1,19 @@
+Esse programa funciona com base em dois atalhos de teclado.
+-----------------------------------------------------------
+Ctrl + Shift + V
+-----------------------------------------------------------
+Vai colar o que você copiou removendo todas as quebras de linha, inclusive no início e fim do texto e também remove espaços duplicados que podem ter nos PDFs em que a edição não é habilitada e você precisa usar OCR.
+-----------------------------------------------------------
+Ctrl + Alt + Shift + V
+-----------------------------------------------------------
+Cola sem remover quebras de linha, mas remove espaços em branco no inicio/fim de cada linha, espaços duplicados e e também paragrafos.
+Esse serve melhor na hora de colar as alternativas que você copiou, pois ele remove também as letras da alternativa, por exemplo [ A) a) B) b) ... até e) ].
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+Basicamente ele é só um executável (estrategia_quest.exe, ícone verde com a letra H) que fica com um ícone na bandeja do sistema (na parte inferior direita da sua tela), nesse ícone você consegue pausar ou fechar o macro.
+
+Site do programa/compilardor:
+https://www.autohotkey.com
