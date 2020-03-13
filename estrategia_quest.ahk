@@ -7,10 +7,34 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 CopyLeft @diego.oap
 diego_oliveira_alves@hotmail.com
 */
+; -----------------------------------------------------------------------------
+; Formata Enunciado
+; -----------------------------------------------------------------------------
+^+v:: ; Ctrl + Shift + V
+; Trim para remover lixo
+Clipboard := trim(clipboard,"`n`r`t ")
+; Remove espaços duplicados no meio / quebra de linha
+;clipboard := RegExReplace(clipboard, "\S\s\K\s+(?=\S)")
+; Remove espaços duplicados
+clipboard := RegExReplace(clipboard, " +", " ")
 
+
+; Remove break lines 
+loop
+   {
+	  Clipboard := StrReplace(clipboard, "`r`n"," ", count)
+        if (Count = 0)  ; No more replacements needed.
+                break
+   }   
+     
+SendInput ^v
+
+return
 ;-----------------------------------------------------------------------------------
 ; Formata alternativas
 ; ----------------------------------------------------------------------------------
+Formata_alternativas:
+
 ^!+v:: ; Ctrl + Alt + Shift + V
 
 ; Trim para remover lixo
@@ -37,30 +61,27 @@ loop
 	  Clipboard := StrReplace(clipboard, "`r`n`r`n", "`r`n", count)
         if (Count = 0)  ; No more replacements needed.
                 break
-   }
-; Remove espaços duplicados no meio
-clipboard := RegExReplace(clipboard, "\S\s\K\s+(?=\S)")
-; cola
-SendInput ^v
-
-return
-; -----------------------------------------------------------------------------
-; Formata Enunciado
-; -----------------------------------------------------------------------------
-^+v:: ; Ctrl + Shift + V
-; Trim para remover lixo
-Clipboard := trim(clipboard,"`n`r`t ")
-; Remove espaços duplicados no meio
-clipboard := RegExReplace(clipboard, "\S\s\K\s+(?=\S)")
- 
-   loop
+   }   
+loop
    {
-	  Clipboard := StrReplace(clipboard, " `r`n","`r`n", count)
-	  Clipboard := StrReplace(clipboard, "`r`n`r`n", "`r`n", count)
+	  Clipboard := StrReplace(clipboard, "`r`n ", "`r`n", count)
         if (Count = 0)  ; No more replacements needed.
                 break
    }
+       
+; Remove espaços duplicados no meio / quebra de linha
+;clipboard := RegExReplace(clipboard, "\S\s\K\s+(?=\S)")
 
+trim(clipboard)
+
+; remove espacos no comeco
+; Find the position of the first non-whitespace character
+position := RegExMatch(clipboard, "\S")
+; Replace the same amount of space characters as the 'position' minus 1 starting from the beginning of each line.
+clipboard := RegExReplace(clipboard, "m)^[ ]{" . position - 1 . "}")
+
+
+; cola
 SendInput ^v
 
 return
